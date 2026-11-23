@@ -1,0 +1,32 @@
+name: 自动学习打卡机器人
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: # 允许在网页端手动点按钮随时触发
+
+permissions:
+  contents: write # 授予机器人写入仓库文件的权限
+
+jobs:
+  update-status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. 检出最新仓库代码
+        uses: actions/checkout@v4
+
+      - name: 2. 生成最新学习打卡时间
+        run: |
+          echo "# 📊 自动学习状态看板" > STATUS.md
+          echo "" >> STATUS.md
+          echo "- **最近一次云端同步时间 (UTC)**：$(date '+%Y-%m-%d %H:%M:%S')" >> STATUS.md
+          echo "- **当前笔记总数**：$(ls notes/*.md | wc -l) 篇" >> STATUS.md
+          echo "- **自动化状态**：✅ 由 GitHub Actions 自动生成" >> STATUS.md
+
+      - name: 3. 自动提交更新到仓库
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add STATUS.md
+          git diff --staged --quiet || git commit -m "chore: 自动更新学习状态看板 [skip ci]"
+          git push
