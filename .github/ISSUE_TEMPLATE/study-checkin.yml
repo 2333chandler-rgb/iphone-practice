@@ -1,0 +1,32 @@
+name: 📝 学习打卡与复盘
+description: 记录每日 GitHub / 技术学习进度与待办事项
+title: "[打卡] "
+labels: ["study", "checkin"]
+body:
+  - type: input
+    id: topic
+    attributes:
+      label: 今日学习主题
+      description: 用一句话概括今天学了什么
+      placeholder: 例如：配置 GitHub Issue 标准化表单模板
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: 核心收获与笔记
+      description: 记录关键步骤、踩坑点或命令
+      value: |
+        - 收获 1：
+        - 收获 2：
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 闭环检查
+      options:
+        - label: 已同步更新到 notes/ 目录或 README.md
+        - label: 已确认 Actions 自动化看板正常运行
