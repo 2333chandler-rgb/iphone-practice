@@ -5,3 +5,4 @@
 - 配置 `.github/PULL_REQUEST_TEMPLATE.md`（PR 合并前自动带出变更说明与自检清单）
 - 完成首次标准化打卡 Issue（#3）并配置 `study`、`checkin` 自定义标签
 - 已为 `main` 分支配置分支保护规则，验证 PR 提交流程
+- 通过新建分支发起 Pull Request
